@@ -195,7 +195,7 @@ jobs:
       - attach_workspace:
           at: ~/
       - add_ssh_keys:
-          fingerprints: ["21:19:c0:15:0f:12:94:29:80:f0:01:51:c2:b3:e8:97"]
+          fingerprints: ["b2:c9:d7:96:c5:e9:4d:22:29:63:df:4d:8c:2f:64:7f"]
       - run:
           name: install dependencies
           command: apk add --update ansible
@@ -257,7 +257,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: ["21:19:c0:15:0f:12:94:29:80:f0:01:51:c2:b3:e8:97"]
+          fingerprints: ["b2:c9:d7:96:c5:e9:4d:22:29:63:df:4d:8c:2f:64:7f"]
       - attach_workspace:
           at: ~/
       - run:

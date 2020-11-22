@@ -1,0 +1,1 @@
+aws cloudformation create-stack --stack-name ci-cd-aws-udacity --template-body file://cloudfront.yml --parameters  ParameterKey=WorkflowID,ParameterValue=udapeople-kk1j287dqjppmz437 --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2
