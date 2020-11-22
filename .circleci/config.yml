@@ -38,8 +38,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - nmf-{{ checksum "frontend/package.json" }}
-            - nmf-
+            - nmbf-{{ checksum "frontend/package.json" }}
+            - nmbf-
       - run:
           name: Build front-end
           command: |
@@ -49,7 +49,7 @@ jobs:
       - save_cache:
           paths:
             - frontend/node_modules
-          key: nmf-{{ checksum "frontend/package.json" }}
+          key: nmbf-{{ checksum "frontend/package.json" }}
 
   build-backend:
     docker:
@@ -57,7 +57,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build]
+          keys:
+            - nmbb-{{ checksum "backend/package.json" }}
+            - nmbb-
       - run:
           name: Back-end build
           command: |
@@ -65,8 +67,9 @@ jobs:
             npm install 
             npm run build
       - save_cache:
-          paths: [backend/node_modules]
-          key: backend-build
+          paths:
+            - backend/node_modules
+          key: nmbb-{{ checksum "backend/package.json" }}
 
   test-frontend:
     docker:
@@ -74,7 +77,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [test-frontend]
+          keys:
+            - nmtf-{{ checksum "frontend/package.json" }}
+            - nmtf-
       - run:
           name: Front-end test
           command: |
@@ -82,8 +87,9 @@ jobs:
             npm install
             npm run test
       - save_cache:
-          paths: [frontend/node_modules]
-          key: test-frontend
+          paths:
+            - frontend/node_modules
+          key: nmtf-{{ checksum "frontend/package.json" }}
 
   test-backend:
     docker:
@@ -91,7 +97,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [test-backend]
+          keys:
+            - nmtb-{{ checksum "backend/package.json" }}
+            - nmtb-
       - run:
           name: Back-end test
           command: |
@@ -99,8 +107,9 @@ jobs:
             npm install 
             npm run test
       - save_cache:
-          paths: [backend/node_modules]
-          key: test-backend
+          paths:
+            - backend/node_modules
+          key: nmtb-{{ checksum "backend/package.json" }}
 
   scan-frontend:
     docker:
@@ -108,15 +117,18 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [scan-frontend]
+          keys:
+            - nmsf-{{ checksum "frontend/package.json" }}
+            - nmsf-
       - run:
           name: Front-end analyze
           command: |
             cd frontend
             npm audit fix --audit-level=critical --force
       - save_cache:
-          paths: [frontend/node_modules]
-          key: scan-frontend
+          paths:
+            - frontend/node_modules
+          key: nmsf-{{ checksum "frontend/package.json" }}
 
   scan-backend:
     docker:
@@ -124,15 +136,18 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [scan-backend]
+          keys:
+            - nmsb-{{ checksum "backend/package.json" }}
+            - nmsb-
       - run:
           name: Back-end analyze
           command: |
             cd backend
             npm audit fix --audit-level=critical --force
       - save_cache:
-          paths: [backend/node_modules]
-          key: scan-backend
+          paths:
+            - backend/node_modules
+          key: nmsb-{{ checksum "backend/package.json" }}
 
   deploy-infrastructure:
     docker:
