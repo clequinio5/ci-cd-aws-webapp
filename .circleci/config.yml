@@ -37,7 +37,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build]
+          keys:
+            - nmf-{{ checksum "frontend/package.json" }}
+            - nmf-
       - run:
           name: Build front-end
           command: |
@@ -45,8 +47,9 @@ jobs:
             npm install
             npm run build
       - save_cache:
-          paths: [frontend/node_modules]
-          key: frontend-build
+          paths:
+            - frontend/node_modules
+          key: nmf-{{ checksum "frontend/package.json" }}
 
   build-backend:
     docker:
