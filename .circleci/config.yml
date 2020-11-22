@@ -204,20 +204,20 @@ jobs:
           command: |
             cd .circleci/ansible
             ansible-playbook -i inventory.txt configure-server.yml
-  run-migrations:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout
-      - run:
-          name: run and save migration
-          command: |
-            cd backend
-            npm install
-            npm audit fix --audit-level=critical --force
-            npm run migrations > migrations.txt
-            curl -H "Content-Type: text/plain" -H "token: ${MEMSTASH_TOKEN}" --request PUT --data "" https://api.memstash.io/values/migration_key
-            cat migrations.txt
+  # run-migrations:
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: run and save migration
+  #         command: |
+  #           cd backend
+  #           npm install
+  #           npm audit fix --audit-level=critical --force
+  #           npm run migrations > migrations.txt
+  #           curl -H "Content-Type: text/plain" -H "token: ${MEMSTASH_TOKEN}" --request PUT --data "" https://api.memstash.io/values/migration_key
+  #           cat migrations.txt
 
   deploy-frontend:
     docker:
@@ -262,6 +262,7 @@ jobs:
           at: ~/
       - run:
           name: Install dependencies
+          no_output_timeout: 30m
           command: |
             apk add --update tar gzip ansible nodejs npm
             pip install awscli
