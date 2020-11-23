@@ -303,7 +303,8 @@ jobs:
       - run:
           name: Frontend smoke test.
           command: |
-            URL="http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3.website.us-west-2.amazonaws.com"            
+            URL="http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3.website.us-west-2.amazonaws.com"
+            echo ${URL}             
             if curl -s ${URL} | grep "Welcome"
             then
               return 1
@@ -311,14 +312,12 @@ jobs:
               return 0
             fi
       - run:
-          name: backend url / backend smoke test.
+          name: Backend smoke test.
           command: |
             BACKEND_IP=$(aws ec2 describe-instances \
             --filters "Name=tag:Name,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --query 'Reservations[*].Instances[*].PublicDnsName' \
             --output text)
-            echo "toto"
-            echo ${BACKEND_IP}
             echo "https://${BACKEND_IP}:3030/api/status"
             curl "https://${BACKEND_IP}:3030/api/status"
       - destroy-environment:
@@ -347,6 +346,25 @@ jobs:
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       - revert-migrations
+
+# cleanup:
+#   docker:
+#     # Docker image here
+#   steps:
+#     # Checkout code from git
+#     - run:
+#         name: Get old stack workflow id
+#         command: |
+#           # your code here
+#           export OldWorkflowID="the id here"
+#           export STACKS=[] #put the list of stacks here
+#     - run:
+#         name: Remove old stacks and files
+#         command: |
+#           if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
+#           then
+#             # your code here
+#           fi
 
 workflows:
   default:
