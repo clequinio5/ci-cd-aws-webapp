@@ -1,11 +1,11 @@
 Github repository
 [URL01]:https://github.com/clequinio5/ci-cd-aws-webapp
 S3 Bucket ie green candidate frontend
-[URL02]:
+[URL02]:s3://udapeople-kk1j287dqjppmz437
 Cloudfront distribution ie blue production frontend
-[URL03]:
+[URL03]:s3://udapeople-c4b392e
 EC2 backend
-[URL04]:
+[URL04]:http://54.191.111.44:3030
 Prometheus server
 [URL05]:
 
