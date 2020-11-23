@@ -1,1 +1,11 @@
-https://github.com/clequinio5/ci-cd-aws-webapp
+Github repository
+[URL01]:https://github.com/clequinio5/ci-cd-aws-webapp
+S3 Bucket ie green candidate frontend
+[URL02]:
+Cloudfront distribution ie blue production frontend
+[URL03]:
+EC2 backend
+[URL04]:
+Prometheus server
+[URL05]:
+
