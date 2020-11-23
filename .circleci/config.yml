@@ -317,6 +317,9 @@ jobs:
             --filters "Name=tag:Name,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text)
+            echo "toto"
+            echo ${BACKEND_IP}
+            echo "https://${BACKEND_IP}:3030/api/status"
             curl "https://${BACKEND_IP}:3030/api/status"
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
