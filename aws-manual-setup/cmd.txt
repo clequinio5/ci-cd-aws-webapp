@@ -1,1 +1,1 @@
-aws cloudformation create-stack --stack-name udapeople-cloudfront --template-body file://cloudfront.yml --parameters  ParameterKey=WorkflowID,ParameterValue=kk1j287dqjppmz437 --region=us-west-2
+aws cloudformation create-stack --stack-name udapeople-kk1j287dqjppmz437 --template-body file://cloudfront.yml --parameters  ParameterKey=WorkflowID,ParameterValue=kk1j287dqjppmz437 --region=us-west-2
