@@ -357,10 +357,14 @@ jobs:
           command: |
             export OldWorkflowID=$(aws cloudformation list-exports \
             --query "Exports[?Name==\`WorkflowID\`].Value" \
+            --region us-west-2 \
             --no-paginate \
             --output text)
-            export STACKS=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
-            --stack-status-filter CREATE_COMPLETE --no-paginate --output text)
+            export STACKS=$(aws cloudformation list-stacks \
+            --query "StackSummaries[*].StackName" \
+            --stack-status-filter CREATE_COMPLETE \
+            --no-paginate \
+            --output text)
             echo "oldWorkflowId: ${OldWorkflowID}"
             if [[ ${STACKS[@]} =~ ${OldWorkflowID} ]]
             then

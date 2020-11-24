@@ -2,7 +2,7 @@ Description: >
   UdaPeople backend stack.
 
 Parameters:
-  ID:
+  WorkflowID:
     Description: Unique identifier.
     Type: String
 
@@ -10,7 +10,7 @@ Resources:
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: !Sub UdaPeople-${ID}
+      GroupName: !Sub UdaPeople-${WorkflowID}
       GroupDescription: Allow port 22 and port 3030.
       SecurityGroupIngress:
         - IpProtocol: tcp
@@ -29,7 +29,7 @@ Resources:
       SecurityGroups:
         - Ref: InstanceSecurityGroup
       KeyName: udacity
-      ImageId: ami-07dd19a7900a1f049 
+      ImageId: ami-07dd19a7900a1f049
       Tags:
         - Key: Name
-          Value: !Sub backend-${ID}
+          Value: !Sub backend-${WorkflowID}
