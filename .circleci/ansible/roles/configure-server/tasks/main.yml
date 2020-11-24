@@ -3,26 +3,27 @@
   apt:
     update_cache: yes
 
-- name: "upgrade packages."
-  become: true
+- name: "upgrade packages"
+  become: yes
   apt:
-    upgrade: "yes"
+    upgrade: yes
 
-- name: "install node 13.X"
-  shell: |
-    curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-    sudo apt install -y nodejs
+- name: remove dependencies that are no longer required
+  become: yes
+  apt:
+    autoremove: yes
+
+- name: "install dependencies."
+  become: yes
+  apt:
+    name: ["nodejs", "npm"]
+    state: latest
+    update_cache: yes
+
 - name: "install pm2"
-  become: true
+  become: yes
   npm:
     name: pm2
     global: yes
     production: yes
-    state: present      
-
-- name: "install node_exporter"
-  shell: |
-    wget https://github.com/prometheus/node_exporter/releases/download/v1.0.1/node_exporter-1.0.1.linux-amd64.tar.gz
-    tar xzf node_exporter-1.0.1.linux-amd64.tar.gz
-    sudo cp node_exporter-1.0.1.linux-amd64/node_exporter /usr/local/bin/node_exporter
-    rm -rf node_exporter-1.0.1.linux-amd64.tar.gz node_exporter-1.0.1.linux-amd64
+    state: present
