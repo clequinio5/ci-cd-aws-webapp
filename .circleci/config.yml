@@ -8,11 +8,12 @@ commands:
         type: string
     steps:
       - run:
-          name: Destroy environment ${CIRCLE_WORKFLOW_ID}
+          name: Destroy environment << parameters.workflow_id >>
           command: |
-            aws s3 rb s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --force
-            aws cloudformation delete-stack --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}
-            aws cloudformation delete-stack --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
+            aws s3 rb s3://udapeople-<< parameters.workflow_id >> --force
+            aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.workflow_id >>
+            aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.workflow_id >>
+            aws cloudformation delete-stack --stack-name udapeople-cloudfront-<< parameters.workflow_id >>
           when: on_fail
 
   revert-migrations:
