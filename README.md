@@ -2,7 +2,9 @@
 
 ## What is CI/CD?
 
-![CI/CD pipeline](./assets/CICD_pipeline.png)
+<p align="center">
+  <img src="./assets/CICD_pipeline.png" alt="CI/CD pipeline"/>
+</p>
 
 
 ## Why Ci/CD?
