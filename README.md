@@ -1,7 +1,5 @@
 # CI/CD AWS deployment following the green/blue strategy
 
-## CI/CD
-
 <p align="center">
   <img src="./assets/CICD_pipeline.png" alt="CI/CD pipeline"/>
 </p>
