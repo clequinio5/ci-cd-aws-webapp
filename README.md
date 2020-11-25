@@ -1,5 +1,13 @@
 # CI/CD AWS deployment following the Blue|Green strategy
 
+## Stack
+
+- GitHub
+- CircleCI
+- AWS (EC2, Cloudformation, Cloudfront, S3)
+- Ansible
+- Prometheus (+ AlertManager)
+
 <p align="center">
   <img src="./assets/CICD_pipeline.png" alt="CI/CD pipeline"/>
 </p>
