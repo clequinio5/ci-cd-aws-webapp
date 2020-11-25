@@ -51,7 +51,7 @@ Prometheus Monitoring Server is set up manually thanks to these very good articl
 
 - [Set up Prometheus Server on EC2](https://codewizardly.com/prometheus-on-aws-ec2-part1/)
 - [Set up the prometheus node exporter service on the EC2 instance to monitor](https://codewizardly.com/prometheus-on-aws-ec2-part2/)
-- [Configure Prometheus for AWS Service Discovery](https://codewizardly.com/)prometheus-on-aws-ec2-part3/
+- [Configure Prometheus for AWS Service Discovery](https://codewizardly.com/prometheus-on-aws-ec2-part3/)
 - [Install and configure AlertManager](https://codewizardly.com/prometheus-on-aws-ec2-part4/)
 
 
