@@ -380,6 +380,7 @@ jobs:
           name: Remove blue stacks and files
           command: |
             export OldWorkflowID = $(curl -H "token: 2570abb2-86d7-4fcb-b317-7a41cc41dd54" --request GET https://api.memstash.io/values/)
+            echo "${OldWorkflowID}"
             aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
             aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
             aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
