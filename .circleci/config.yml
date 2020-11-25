@@ -305,12 +305,12 @@ jobs:
       - run:
           name: Frontend smoke test.
           command: |
-            URL="http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3.website.us-west-2.amazonaws.com"        
+            URL="http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website-us-west-2.amazonaws.com"        
             if curl -s ${URL} | grep "Welcome"
             then
-              return 1
-            else
               return 0
+            else
+              return 1
             fi
       - run:
           name: Backend smoke test.
@@ -319,7 +319,12 @@ jobs:
             --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text)
-            curl "http://${BACKEND_IP}:3030/api/status"
+            if curl -s "http://${BACKEND_IP}:3030/api/status"
+            then
+              return 0
+            else
+              return 1
+            fi
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       - revert-migrations
@@ -337,6 +342,7 @@ jobs:
             yum -y install tar gzip
       - run:
           name: Update cloudfront distribution
+          no_output_timeout: 30m
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/cloudfront.yml \
