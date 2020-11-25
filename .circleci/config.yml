@@ -9,6 +9,7 @@ commands:
     steps:
       - run:
           name: Destroy environment << parameters.workflow_id >>
+          no_output_timeout: 30m
           command: |
             aws s3 rb s3://udapeople-<< parameters.workflow_id >> --force
             aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.workflow_id >>
