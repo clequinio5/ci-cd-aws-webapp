@@ -1,13 +1,11 @@
-# CI/CD AWS deployment following the green/blue strategy
-
-## What is CI/CD?
+# CI/CD AWS deployment following the Blue|Green strategy
 
 <p align="center">
   <img src="./assets/CICD_pipeline.png" alt="CI/CD pipeline"/>
 </p>
 
 
-## Why Ci/CD?
+## Why CI/CD?
 
 <table>
 <tr> 
