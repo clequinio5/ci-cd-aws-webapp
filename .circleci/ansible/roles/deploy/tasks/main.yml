@@ -19,10 +19,10 @@
   shell: |
     cd /home/ubuntu/backend
     npm run migrations
-    
+
 - name: Executing node
   become: true
   shell: |
     cd /home/ubuntu/backend 
-    pm2 start npm --name backend --run "start:prod"
+    pm2 start npm --name backend --run start
     pm2 ls

@@ -274,7 +274,7 @@ jobs:
           name: deploy backend
           no_output_timeout: 30m
           command: |
-            echo ENVIRONMENT=production > "backend/.env"
+            echo ENVIRONMENT=production >> "backend/.env"
             echo TYPEORM_CONNECTION=postgres >> "backend/.env"
             echo TYPEORM_MIGRATIONS_DIR=./src/migrations >> "backend/.env"
             echo TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts >> "backend/.env"
