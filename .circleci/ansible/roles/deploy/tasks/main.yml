@@ -14,10 +14,6 @@
     cd /home/ubuntu/backend
     npm run build
     npm run prestart:prod
-#- name: Build Node App
-#  shell: |
-#    cd /home/ubuntu/backend
-#    npm run build
 
 - name: "run migrations again"
   shell: |
@@ -28,5 +24,5 @@
   become: true
   shell: |
     cd /home/ubuntu/backend 
-    pm2 start npm --name backend -- start
+    pm2 start npm --name backend --run "start:prod"
     pm2 ls
