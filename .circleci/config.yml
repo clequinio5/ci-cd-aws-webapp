@@ -274,8 +274,7 @@ jobs:
           name: deploy backend
           no_output_timeout: 30m
           command: |
-            echo NODE_ENV=production > "backend/.env"
-            echo ENVIROMENT=production > "backend/.env"
+            echo ENVIRONMENT=production > "backend/.env"
             echo TYPEORM_CONNECTION=postgres >> "backend/.env"
             echo TYPEORM_MIGRATIONS_DIR=./src/migrations >> "backend/.env"
             echo TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts >> "backend/.env"
@@ -358,7 +357,7 @@ jobs:
             echo "oldWorkflowId: ${OldWorkflowID}"
             if [[ ${STACKS[@]} =~ ${OldWorkflowID} ]]
             then
-              curl -H "Content-Type: text/plain" -H "token: 2570abb2-86d7-4fcb-b317-7a41cc41dd54" --request PUT --data "${OldWorkflowID}" https://api.memstash.io/values/oldWorkflowID
+              curl -H "Content-Type: text/plain" -H "token: ${MEMSTASH_TOKEN}" --request PUT --data "${OldWorkflowID}" https://api.memstash.io/values/oldWorkflowID
             fi
       - run:
           name: Update cloudfront distribution
@@ -380,7 +379,7 @@ jobs:
       - run:
           name: Remove blue stacks and files
           command: |
-            OldWorkflowID=$(curl -H "token: 2570abb2-86d7-4fcb-b317-7a41cc41dd54" --request GET https://api.memstash.io/values/oldWorkflowID)
+            OldWorkflowID=$(curl -H "token: ${MEMSTASH_TOKEN}" --request GET https://api.memstash.io/values/oldWorkflowID)
             echo "${OldWorkflowID}"
             aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
             aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
