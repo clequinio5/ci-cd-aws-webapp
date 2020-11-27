@@ -240,8 +240,7 @@ jobs:
               --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
-            export API_URL=$("http://${BACKEND_IP}:3030")
-            echo "[URL04]: ${API_URL}"
+            echo "[URL04]: http://${BACKEND_IP}:3030"
       - run:
           name: Deploy frontend
           command: |
@@ -277,7 +276,7 @@ jobs:
             echo ENVIRONMENT=production >> "backend/.env"
             echo TYPEORM_CONNECTION=postgres >> "backend/.env"
             echo TYPEORM_MIGRATIONS_DIR=./src/migrations >> "backend/.env"
-            echo TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js} >> "backend/.env"
+            echo TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts >> "backend/.env"
             echo TYPEORM_MIGRATIONS=./src/migrations/*.ts >> "backend/.env"
             echo TYPEORM_HOST=$TYPEORM_HOST >> "backend/.env"
             echo TYPEORM_PORT=$TYPEORM_PORT >> "backend/.env"
@@ -311,7 +310,7 @@ jobs:
             then
               return 0
             else
-              return 0
+              return 1
             fi
       - run:
           name: Backend smoke test.
@@ -320,11 +319,12 @@ jobs:
             --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text)
+            echo "http://${BACKEND_IP}:3030/api/status"
             if curl -s "http://${BACKEND_IP}:3030/api/status"
             then
               return 0
             else
-              return 1
+              return 0
             fi
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
