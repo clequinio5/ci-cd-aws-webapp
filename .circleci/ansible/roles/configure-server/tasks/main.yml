@@ -14,16 +14,19 @@
     autoremove: yes
 
 - name: "Add nodejs apt key"
+  become: yes
   apt_key:
     url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
     state: present
 
 - name: "Add nodejs 13.x ppa for apt repo"
+  become: yes
   apt_repository:
     repo: deb https://deb.nodesource.com/node_13.x bionic main
     update_cache: yes
 
 - name: "Install nodejs"
+  become: yes
   apt:
     update_cache: yes
     name: nodejs
