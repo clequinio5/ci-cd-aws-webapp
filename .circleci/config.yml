@@ -273,7 +273,7 @@ jobs:
           name: deploy backend
           no_output_timeout: 30m
           command: |
-            echo ENVIRONMENT=production >> "backend/.env"
+            echo NODE_ENV=production >> "backend/.env"
             echo TYPEORM_CONNECTION=postgres >> "backend/.env"
             echo TYPEORM_MIGRATIONS_DIR=./src/migrations >> "backend/.env"
             echo TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts >> "backend/.env"
@@ -320,12 +320,7 @@ jobs:
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text)
             echo "http://${BACKEND_IP}:3030/api/status"
-            if curl -s "http://${BACKEND_IP}:3030/api/status"
-            then
-              return 0
-            else
-              return 0
-            fi
+            curl -s "http://${BACKEND_IP}:3030/api/status"
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       - revert-migrations
