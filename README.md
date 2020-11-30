@@ -12,7 +12,7 @@
   <img src="./assets/CICD_pipeline.png" alt="CI/CD pipeline"/>
 </p>
 
-## Project overview
+## Overview
 
 <p align="center">
   <img src="./assets/CICD_pipeline_project.png" alt="CI/CD project"/>
